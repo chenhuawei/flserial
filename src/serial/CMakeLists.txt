@@ -50,6 +50,22 @@ endif()
 add_library(${PROJECT_NAME} ${serial_SRCS})
 if(APPLE)
     target_link_libraries(${PROJECT_NAME} ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+            FRAMEWORK TRUE
+            FRAMEWORK_VERSION C
+            MACOSX_FRAMEWORK_IDENTIFIER com.cmake.dynamicFramework
+            #            MACOSX_FRAMEWORK_INFO_PLIST Info.plist
+            # "current version" in semantic format in Mach-O binary file
+            VERSION 16.4.0
+            # "compatibility version" in semantic format in Mach-O binary file
+            SOVERSION 1.0.0
+#            PUBLIC_HEADER include/serial/serial.h,include/serial/v8stdint.h
+            #            XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
+    )
+    set_property(SOURCE include/serial/serial.h PROPERTY
+            MACOSX_PACKAGE_LOCATION Headers/)
+    set_property(SOURCE include/serial/v8stdint.h PROPERTY
+            MACOSX_PACKAGE_LOCATION Headers/)
 elseif(UNIX)
     target_link_libraries(${PROJECT_NAME} rt pthread)
 else()

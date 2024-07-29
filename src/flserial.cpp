@@ -32,13 +32,14 @@ FFI_PLUGIN_EXPORT int fl_open (int flh, char *portname, int baudrate) {
     flserial_tab[porth] = port;
 
 
-    strncpy_s(port->portname, portname, MAX_PORT_NAME_LEN);
+    strncpy(port->portname, portname, MAX_PORT_NAME_LEN);
     port->baudrate = baudrate;
     port->lasterror = FL_ERROR_OK;
 
 
     port->serialport = new serial::Serial();
-    port->serialport->setTimeout(serial::Timeout(0,1,0));
+//    port->serialport->setTimeout(serial::Timeout(0,1,0,0,0));
+    port->serialport->setTimeout(0, 1, 0, 0, 0);
     port->serialport->setPort(portname);
     port->serialport->setBaudrate(baudrate);
    
@@ -64,7 +65,7 @@ FFI_PLUGIN_EXPORT int fl_ports (int index, int buffsize, char *buff) {
     } else 
     {
         serial::PortInfo info = list[index];
-        return sprintf_s(buff, buffsize, "%s - %s - %s", info.port.c_str(), info.description.c_str(), info.hardware_id.c_str());
+        return snprintf(buff, buffsize, "%s - %s - %s", info.port.c_str(), info.description.c_str(), info.hardware_id.c_str());
     }
 }
 
