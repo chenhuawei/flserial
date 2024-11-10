@@ -30,7 +30,8 @@ A new Flutter FFI plugin project.
 #   s.dependency 'flserial'
 #  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' } #配置HeaderSearchPaths，libxml这个库需要这么配置
 #   s.xcconfig = { 'HEADER_SEARCH_PATHS' => 'Frameworks/serial.framework/Headers','CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
-  s.platform = :osx, '10.11'
+#   s.platform = :osx, '10.11'
+  s.platform = :osx
 #   s.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 #   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'HEADER_SEARCH_PATHS' => 'Frameworks/serial.framework/Headers' }
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
